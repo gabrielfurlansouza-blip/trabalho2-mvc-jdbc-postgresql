@@ -105,6 +105,11 @@ public class Main {
         System.out.println("\n--- [9] Alunos do Java Avançado após substituição ---");
         cursoController.listarAlunosDoCurso(cursoJava.getId());
 
+        // 10. Exibir total de matriculados por curso
+        System.out.println("\n--- [10] Total de matriculados por curso ---");
+        matriculaController.exibirTotalMatriculadosPorCurso(cursoJava.getId(), "Java Avançado");
+        matriculaController.exibirTotalMatriculadosPorCurso(cursoSQL.getId(), "SQL e PostgreSQL");
+
         System.out.println("\n============================================");
         System.out.println("   FIM DA SIMULAÇÃO");
         System.out.println("============================================");

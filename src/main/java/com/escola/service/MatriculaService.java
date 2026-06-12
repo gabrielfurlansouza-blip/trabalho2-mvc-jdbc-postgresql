@@ -55,6 +55,10 @@ public class MatriculaService {
         return matriculaRepository.findAll();
     }
 
+    public int contarMatriculadosPorCurso(Long idCurso) {
+        return matriculaRepository.countByCurso(idCurso);
+    }
+
     public void cancelar(Long id) {
         Matricula m = matriculaRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Matrícula não encontrada com id: " + id));

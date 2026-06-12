@@ -74,6 +74,21 @@ public class MatriculaRepository {
         return lista;
     }
 
+    public int countByCurso(Long idCurso) {
+        String sql = "SELECT COUNT(*) FROM matriculas WHERE id_curso = ?";
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, idCurso);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao contar matrículas do curso: " + e.getMessage(), e);
+        }
+        return 0;
+    }
+
     public void delete(Long id) {
         String sql = "DELETE FROM matriculas WHERE id = ?";
         try (Connection conn = Conexao.getConexao();

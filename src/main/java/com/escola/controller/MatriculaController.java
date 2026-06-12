@@ -27,4 +27,9 @@ public class MatriculaController {
         System.out.println("=== Todas as Matrículas (" + lista.size() + ") ===");
         lista.forEach(System.out::println);
     }
+
+    public void exibirTotalMatriculadosPorCurso(Long idCurso, String nomeCurso) {
+        int total = matriculaService.contarMatriculadosPorCurso(idCurso);
+        System.out.println("[INFO] Curso '" + nomeCurso + "' possui " + total + " aluno(s) matriculado(s).");
+    }
 }
