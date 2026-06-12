@@ -36,7 +36,7 @@ public class Main {
         // 3. Matricular alunos em cursos
         System.out.println("\n--- [3] Matriculando Alunos ---");
         Matricula m1 = matriculaController.matricular(aluno1.getId(), cursoJava.getId(), 500.00);
-        matriculaController.matricular(aluno2.getId(), cursoJava.getId(), 500.00);
+        Matricula m2 = matriculaController.matricular(aluno2.getId(), cursoJava.getId(), 500.00);
         matriculaController.matricular(aluno1.getId(), cursoSQL.getId(), 300.00);
 
         // 4. Listar alunos de cada curso
@@ -109,6 +109,28 @@ public class Main {
         System.out.println("\n--- [10] Total de matriculados por curso ---");
         matriculaController.exibirTotalMatriculadosPorCurso(cursoJava.getId(), "Java Avançado");
         matriculaController.exibirTotalMatriculadosPorCurso(cursoSQL.getId(), "SQL e PostgreSQL");
+
+        System.out.println("\n============================================");
+        System.out.println("   CRUD COMPLETO – UPDATE E DELETE");
+        System.out.println("============================================\n");
+
+        System.out.println("--- [U1] Atualizando dados da Fernanda Costa ---");
+        alunoController.atualizar(aluno2.getId(), "Fernanda Costa Silva", "fernanda.silva@email.com", "(41) 93333-9999");
+
+        System.out.println("\n--- [U2] Listando todos os alunos após atualização ---");
+        alunoController.listarTodos();
+
+        System.out.println("\n--- [D1] Cancelando matrícula da Fernanda no Java Avançado (DELETE) ---");
+        matriculaController.cancelar(m2.getId());
+
+        System.out.println("\n--- [D2] Alunos do Java Avançado após cancelamento ---");
+        cursoController.listarAlunosDoCurso(cursoJava.getId());
+
+        System.out.println("\n--- [D3] Removendo aluno Fernanda do sistema (sem matrículas ativas) ---");
+        alunoController.remover(aluno2.getId());
+
+        System.out.println("\n--- [D4] Listando todos os alunos após remoção ---");
+        alunoController.listarTodos();
 
         System.out.println("\n============================================");
         System.out.println("   FIM DA SIMULAÇÃO");

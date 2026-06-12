@@ -41,4 +41,19 @@ public class AlunoController {
             cursos.forEach(System.out::println);
         }
     }
+
+    public void atualizar(Long id, String nome, String email, String telefone) {
+        Aluno aluno = alunoService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Aluno não encontrado com id: " + id));
+        aluno.setNome(nome);
+        aluno.setEmail(email);
+        aluno.setTelefone(telefone);
+        alunoService.atualizar(aluno);
+        System.out.println("[OK] Aluno atualizado: " + aluno);
+    }
+
+    public void remover(Long id) {
+        alunoService.remover(id);
+        System.out.println("[OK] Aluno ID " + id + " removido com sucesso.");
+    }
 }

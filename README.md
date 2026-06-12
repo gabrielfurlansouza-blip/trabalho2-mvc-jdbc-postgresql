@@ -72,6 +72,64 @@ CREATE TABLE matriculas (
 9. **Nome do aluno obrigatório**: O campo nome do aluno é obrigatório no cadastro.
 10. **Vagas totais positivas**: O número de vagas de um curso deve ser maior que zero.
 
+## Como Executar
+
+### Pré-requisitos
+
+- Java 17+
+- Maven 3.6+
+- PostgreSQL rodando localmente
+
+### 1. Criar o banco de dados
+
+Acesse o PostgreSQL e execute:
+
+```sql
+CREATE DATABASE escola_db;
+\c escola_db
+
+CREATE TABLE alunos (
+    id       SERIAL PRIMARY KEY,
+    nome     VARCHAR(100) NOT NULL,
+    email    VARCHAR(100),
+    telefone VARCHAR(20)
+);
+
+CREATE TABLE cursos (
+    id                SERIAL PRIMARY KEY,
+    nome              VARCHAR(100) NOT NULL,
+    descricao         TEXT,
+    carga_horaria     INTEGER,
+    vagas_totais      INTEGER NOT NULL,
+    vagas_disponiveis INTEGER NOT NULL
+);
+
+CREATE TABLE matriculas (
+    id             SERIAL PRIMARY KEY,
+    id_aluno       INTEGER REFERENCES alunos(id),
+    id_curso       INTEGER REFERENCES cursos(id),
+    data_matricula DATE NOT NULL,
+    valor          DECIMAL(10,2) NOT NULL,
+    UNIQUE (id_aluno, id_curso)
+);
+```
+
+### 2. Configurar a conexão
+
+Edite `src/main/java/com/escola/util/Conexao.java` com as credenciais do seu banco:
+
+```java
+private static final String URL      = "jdbc:postgresql://localhost:5432/escola_db";
+private static final String USER     = "postgres";
+private static final String PASSWORD = "postgres";
+```
+
+### 3. Compilar e executar
+
+```bash
+mvn compile exec:java -Dexec.mainClass="com.escola.Main"
+```
+
 ## Estrutura do Projeto (Padrão MVC)
 
 ```
