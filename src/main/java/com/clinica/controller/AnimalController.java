@@ -30,4 +30,19 @@ public class AnimalController {
         System.out.println("=== Animais Cadastrados (" + animais.size() + ") ===");
         animais.forEach(System.out::println);
     }
+
+    public void atualizar(Long id, String nome, String especie, String raca) {
+        Animal animal = animalService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Animal não encontrado com id: " + id));
+        animal.setNome(nome);
+        animal.setEspecie(especie);
+        animal.setRaca(raca);
+        animalService.atualizar(animal);
+        System.out.println("[OK] Animal atualizado: " + animal);
+    }
+
+    public void remover(Long id) {
+        animalService.remover(id);
+        System.out.println("[OK] Animal ID " + id + " removido com sucesso.");
+    }
 }

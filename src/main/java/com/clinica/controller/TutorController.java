@@ -51,4 +51,19 @@ public class TutorController {
             animais.forEach(System.out::println);
         }
     }
+
+    public void atualizar(Long id, String nome, String endereco, String telefone) {
+        Tutor tutor = tutorService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado com id: " + id));
+        tutor.setNome(nome);
+        tutor.setEndereco(endereco);
+        tutor.setTelefone(telefone);
+        tutorService.atualizar(tutor);
+        System.out.println("[OK] Tutor atualizado: " + tutor);
+    }
+
+    public void remover(Long id) {
+        tutorService.remover(id);
+        System.out.println("[OK] Tutor ID " + id + " removido com sucesso.");
+    }
 }

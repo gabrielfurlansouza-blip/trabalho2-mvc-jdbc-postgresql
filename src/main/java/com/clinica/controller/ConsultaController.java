@@ -32,4 +32,9 @@ public class ConsultaController {
         System.out.println("=== Todas as Consultas (" + consultas.size() + ") ===");
         consultas.forEach(System.out::println);
     }
+
+    public void remover(Long id) {
+        consultaService.remover(id);
+        System.out.println("[OK] Consulta ID " + id + " removida com sucesso.");
+    }
 }

@@ -45,7 +45,7 @@ public class Main {
 
         // 6. Registrar mais uma consulta para o mesmo animal
         System.out.println("\n--- [6] Registrando segunda Consulta para Rex (João) ---");
-        consultaController.registrar(animal.getId(), LocalDate.now().minusDays(30), "Vacina antirrábica", 80.00);
+        var consulta2 = consultaController.registrar(animal.getId(), LocalDate.now().minusDays(30), "Vacina antirrábica", 80.00);
 
         // 7. Listar animais de cada tutor
         System.out.println("\n--- [7] Animais do Tutor João ---");
@@ -96,6 +96,30 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("[REGRA APLICADA] " + e.getMessage());
         }
+
+        System.out.println("\n============================================");
+        System.out.println("   CRUD COMPLETO – UPDATE E DELETE");
+        System.out.println("============================================\n");
+
+        // UPDATE: atualizar endereço e telefone do tutor
+        System.out.println("--- [U1] Atualizando dados do Tutor João ---");
+        tutorController.atualizar(tutor.getId(), "João Silva", "Av. das Araucárias, 500 – Curitiba", "(41) 99900-0001");
+
+        // LIST ALL após update
+        System.out.println("\n--- [U2] Listando todos os tutores após atualização ---");
+        tutorController.listarTodos();
+
+        // UPDATE: atualizar raça do animal
+        System.out.println("\n--- [U3] Atualizando raça do Rex (Labrador → Golden Retriever) ---");
+        animalController.atualizar(animal.getId(), "Rex", "Cachorro", "Golden Retriever");
+
+        // DELETE: remover a segunda consulta
+        System.out.println("\n--- [U4] Removendo consulta de vacinação (DELETE) ---");
+        consultaController.remover(consulta2.getId());
+
+        // Verificar histórico após remoção
+        System.out.println("\n--- [U5] Histórico do Rex após remoção – deve ter apenas 1 registro ---");
+        consultaController.historicoDoAnimal(animal.getId());
 
         System.out.println("\n============================================");
         System.out.println("   FIM DA SIMULAÇÃO");

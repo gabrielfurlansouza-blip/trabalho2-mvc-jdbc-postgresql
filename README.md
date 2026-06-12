@@ -65,6 +65,36 @@ CREATE TABLE consultas (
 6. **Histórico por animal**: O sistema deve permitir consultar todas as consultas de um animal específico.
 7. **Animais por tutor**: O sistema deve permitir listar todos os animais cadastrados de um determinado tutor.
 
+## Como Executar
+
+### Pré-requisitos
+- Java 17+
+- PostgreSQL 14+
+
+### 1. Criar o banco de dados
+Conecte ao PostgreSQL e execute:
+```sql
+CREATE DATABASE clinica_db;
+```
+
+### 2. Criar as tabelas
+Execute os comandos `CREATE TABLE` listados acima no banco `clinica_db`.
+
+### 3. Configurar a conexão
+Edite `src/main/java/com/clinica/util/Conexao.java` com suas credenciais:
+```java
+private static final String URL  = "jdbc:postgresql://localhost:5432/clinica_db";
+private static final String USER = "postgres";
+private static final String PASSWORD = "sua_senha";
+```
+
+### 4. Compilar e executar
+```bash
+mvn compile exec:java -Dexec.mainClass="com.clinica.Main"
+```
+
+---
+
 ## Estrutura do Projeto (Padrão MVC)
 
 ```
