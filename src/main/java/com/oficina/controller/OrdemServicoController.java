@@ -36,4 +36,9 @@ public class OrdemServicoController {
         System.out.println("=== Todas as Ordens de Serviço (" + lista.size() + ") ===");
         lista.forEach(System.out::println);
     }
+
+    public void remover(Long id) {
+        ordemServicoService.remover(id);
+        System.out.println("[OK] Ordem de serviço ID " + id + " removida com sucesso.");
+    }
 }

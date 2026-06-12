@@ -44,6 +44,9 @@ public class OrdemServicoService {
     public void concluir(Long id) {
         OrdemServico os = ordemServicoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Ordem de serviço não encontrada com id: " + id));
+        if (os.getStatus() == OrdemServico.Status.CONCLUIDA) {
+            throw new IllegalArgumentException("Ordem de serviço ID " + id + " já está CONCLUIDA.");
+        }
         os.setStatus(OrdemServico.Status.CONCLUIDA);
         ordemServicoRepository.update(os);
     }

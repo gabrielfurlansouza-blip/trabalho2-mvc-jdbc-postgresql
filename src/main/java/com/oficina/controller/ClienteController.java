@@ -41,4 +41,18 @@ public class ClienteController {
             veiculos.forEach(System.out::println);
         }
     }
+
+    public void atualizar(Long id, String nome, String telefone) {
+        Cliente cliente = clienteService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado com id: " + id));
+        cliente.setNome(nome);
+        cliente.setTelefone(telefone);
+        clienteService.atualizar(cliente);
+        System.out.println("[OK] Cliente atualizado: " + cliente);
+    }
+
+    public void remover(Long id) {
+        clienteService.remover(id);
+        System.out.println("[OK] Cliente ID " + id + " removido com sucesso.");
+    }
 }

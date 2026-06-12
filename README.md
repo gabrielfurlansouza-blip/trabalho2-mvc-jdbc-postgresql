@@ -64,6 +64,36 @@ CREATE TABLE ordens_servico (
 7. **Histórico por veículo**: O sistema deve permitir consultar todas as ordens de serviço de um veículo específico.
 8. **Veículos por cliente**: O sistema deve permitir listar todos os veículos de um determinado cliente.
 
+## Como Executar
+
+### Pré-requisitos
+- Java 17+
+- PostgreSQL 14+
+
+### 1. Criar o banco de dados
+Conecte ao PostgreSQL e execute:
+```sql
+CREATE DATABASE oficina_db;
+```
+
+### 2. Criar as tabelas
+Execute os comandos `CREATE TABLE` listados acima no banco `oficina_db`.
+
+### 3. Configurar a conexão
+Edite `src/main/java/com/oficina/util/Conexao.java` com suas credenciais:
+```java
+private static final String URL  = "jdbc:postgresql://localhost:5432/oficina_db";
+private static final String USER = "postgres";
+private static final String PASSWORD = "sua_senha";
+```
+
+### 4. Compilar e executar
+```bash
+mvn compile exec:java -Dexec.mainClass="com.oficina.Main"
+```
+
+---
+
 ## Estrutura do Projeto (Padrão MVC)
 
 ```

@@ -44,7 +44,7 @@ public class Main {
 
         // 6. Abrir segunda Ordem de Serviço para o mesmo veículo
         System.out.println("\n--- [6] Abrindo segunda Ordem de Serviço para o Civic ---");
-        osController.abrir(veiculo.getId(), "Revisão completa – 50.000 km", 800.00);
+        var os2 = osController.abrir(veiculo.getId(), "Revisão completa – 50.000 km", 800.00);
 
         // 7. Concluir a primeira OS
         System.out.println("\n--- [7] Concluindo a primeira OS ---");
@@ -96,6 +96,34 @@ public class Main {
         } catch (IllegalArgumentException e) {
             System.out.println("[REGRA APLICADA] " + e.getMessage());
         }
+
+        // Regra: tentar concluir uma OS já concluída
+        System.out.println("\n--- [RN4] Tentando concluir uma OS que já está CONCLUIDA ---");
+        try {
+            osController.concluir(os1.getId());
+        } catch (IllegalArgumentException e) {
+            System.out.println("[REGRA APLICADA] " + e.getMessage());
+        }
+
+        System.out.println("\n============================================");
+        System.out.println("   CRUD COMPLETO – UPDATE E DELETE");
+        System.out.println("============================================\n");
+
+        // UPDATE: atualizar telefone do cliente
+        System.out.println("--- [U1] Atualizando telefone do Cliente Carlos ---");
+        clienteController.atualizar(cliente.getId(), "Carlos Pereira", "(41) 99900-0002");
+
+        // LIST ALL clientes após update
+        System.out.println("\n--- [U2] Listando todos os clientes após atualização ---");
+        clienteController.listarTodos();
+
+        // DELETE: remover a segunda OS (Revisão)
+        System.out.println("\n--- [U3] Removendo a segunda OS do Civic (DELETE) ---");
+        osController.remover(os2.getId());
+
+        // Verificar histórico após remoção
+        System.out.println("\n--- [U4] Histórico do Civic após remoção – deve ter apenas 1 OS ---");
+        osController.historicoPorVeiculo(veiculo.getId());
 
         System.out.println("\n============================================");
         System.out.println("   FIM DA SIMULAÇÃO");
