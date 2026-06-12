@@ -25,6 +25,11 @@ public class MatriculaService {
                 .orElseThrow(() -> new IllegalArgumentException(
                         "Curso com id " + matricula.getIdCurso() + " não está cadastrado."));
 
+        // Regra: valor não pode ser negativo
+        if (matricula.getValor() < 0) {
+            throw new IllegalArgumentException("O valor da matrícula não pode ser negativo.");
+        }
+
         // Regra: não pode matricular o mesmo aluno duas vezes no mesmo curso
         if (matriculaRepository.existsByAlunoAndCurso(matricula.getIdAluno(), matricula.getIdCurso())) {
             throw new IllegalArgumentException(
@@ -35,11 +40,6 @@ public class MatriculaService {
         if (curso.getVagasDisponiveis() <= 0) {
             throw new IllegalArgumentException(
                     "Curso sem vagas disponíveis. Vagas: " + curso.getVagasDisponiveis());
-        }
-
-        // Regra: valor não pode ser negativo
-        if (matricula.getValor() < 0) {
-            throw new IllegalArgumentException("O valor da matrícula não pode ser negativo.");
         }
 
         Matricula salva = matriculaRepository.save(matricula);
