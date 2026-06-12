@@ -54,8 +54,12 @@ public class Main {
         System.out.println("\n--- [8] Animais da Tutora Maria ---");
         tutorController.listarAnimaisDeTutor(tutor2.getId());
 
-        // 9. Histórico de consultas por animal
-        System.out.println("\n--- [9] Histórico de Consultas – Rex (João) ---");
+        // 9. Busca de tutor por parte do nome
+        System.out.println("\n--- [9] Buscando tutor pelo nome 'Silva' ---");
+        tutorController.buscarPorNome("Silva");
+
+        // 10. Histórico de consultas por animal
+        System.out.println("\n--- [10] Histórico de Consultas – Rex (João) ---");
         consultaController.historicoDoAnimal(animal.getId());
 
         System.out.println("\n--- [10] Histórico de Consultas – Rex (Maria) – deve estar vazio ---");

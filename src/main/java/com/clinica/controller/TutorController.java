@@ -32,6 +32,16 @@ public class TutorController {
         tutores.forEach(System.out::println);
     }
 
+    public void buscarPorNome(String nome) {
+        List<Tutor> tutores = tutorService.buscarPorNome(nome);
+        System.out.println("=== Busca por nome '" + nome + "' (" + tutores.size() + " resultado(s)) ===");
+        if (tutores.isEmpty()) {
+            System.out.println("[INFO] Nenhum tutor encontrado com esse nome.");
+        } else {
+            tutores.forEach(System.out::println);
+        }
+    }
+
     public void listarAnimaisDeTutor(Long idTutor) {
         List<Animal> animais = tutorService.listarAnimaisDeTutor(idTutor);
         System.out.println("=== Animais do Tutor ID " + idTutor + " (" + animais.size() + ") ===");

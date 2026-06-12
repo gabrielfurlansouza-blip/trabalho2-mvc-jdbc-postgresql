@@ -82,6 +82,22 @@ public class TutorRepository {
         }
     }
 
+    public List<Tutor> findByNome(String nome) {
+        String sql = "SELECT * FROM tutores WHERE LOWER(nome) LIKE LOWER(?) ORDER BY nome";
+        List<Tutor> tutores = new ArrayList<>();
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + nome + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                tutores.add(mapResultSet(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar tutores por nome: " + e.getMessage(), e);
+        }
+        return tutores;
+    }
+
     private Tutor mapResultSet(ResultSet rs) throws SQLException {
         Tutor tutor = new Tutor();
         tutor.setId(rs.getLong("id"));

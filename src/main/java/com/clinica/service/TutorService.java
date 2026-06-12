@@ -39,6 +39,13 @@ public class TutorService {
         tutorRepository.delete(id);
     }
 
+    public List<Tutor> buscarPorNome(String nome) {
+        if (nome == null || nome.isBlank()) {
+            throw new IllegalArgumentException("Informe ao menos parte do nome para a busca.");
+        }
+        return tutorRepository.findByNome(nome);
+    }
+
     public List<Animal> listarAnimaisDeTutor(Long idTutor) {
         tutorRepository.findById(idTutor)
                 .orElseThrow(() -> new IllegalArgumentException("Tutor não encontrado com id: " + idTutor));
