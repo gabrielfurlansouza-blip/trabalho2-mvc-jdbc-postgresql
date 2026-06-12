@@ -1,6 +1,6 @@
 # Cenário 1 – Sistema de Clínica Veterinária
 
-## Tabelas Identificadas
+## Tabelas Identificada
 
 ### Tabela: `tutores`
 | Campo    | Tipo          | Restrição  | Observação              |
