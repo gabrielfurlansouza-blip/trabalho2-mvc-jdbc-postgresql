@@ -89,6 +89,21 @@ public class MatriculaRepository {
         return 0;
     }
 
+    public void update(Matricula matricula) {
+        String sql = "UPDATE matriculas SET id_aluno = ?, id_curso = ?, data_matricula = ?, valor = ? WHERE id = ?";
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setLong(1, matricula.getIdAluno());
+            stmt.setLong(2, matricula.getIdCurso());
+            stmt.setDate(3, Date.valueOf(matricula.getDataMatricula()));
+            stmt.setDouble(4, matricula.getValor());
+            stmt.setLong(5, matricula.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao atualizar matrícula: " + e.getMessage(), e);
+        }
+    }
+
     public void delete(Long id) {
         String sql = "DELETE FROM matriculas WHERE id = ?";
         try (Connection conn = Conexao.getConexao();
