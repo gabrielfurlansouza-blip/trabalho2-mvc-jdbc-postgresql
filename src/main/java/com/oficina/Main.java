@@ -61,6 +61,10 @@ public class Main {
         System.out.println("\n--- [10] Histórico do Corolla – deve estar vazio ---");
         osController.historicoPorVeiculo(veiculo2.getId());
 
+        // 11. Busca de veículo por placa
+        System.out.println("\n--- [11] Buscando veículo pela placa 'ABC-1234' ---");
+        veiculoController.buscarPorPlaca("ABC-1234");
+
         // -----------------------------------------------
         // TESTES DAS REGRAS DE NEGÓCIO
         // -----------------------------------------------

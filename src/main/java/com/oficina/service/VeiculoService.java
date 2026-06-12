@@ -43,4 +43,11 @@ public class VeiculoService {
     public void remover(Long id) {
         veiculoRepository.delete(id);
     }
+
+    public Optional<Veiculo> buscarPorPlaca(String placa) {
+        if (placa == null || placa.isBlank()) {
+            throw new IllegalArgumentException("Placa não pode ser vazia.");
+        }
+        return veiculoRepository.findByPlaca(placa.trim());
+    }
 }

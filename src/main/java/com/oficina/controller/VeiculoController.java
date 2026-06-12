@@ -30,4 +30,11 @@ public class VeiculoController {
         System.out.println("=== Veículos Cadastrados (" + veiculos.size() + ") ===");
         veiculos.forEach(System.out::println);
     }
+
+    public void buscarPorPlaca(String placa) {
+        veiculoService.buscarPorPlaca(placa).ifPresentOrElse(
+                v -> System.out.println("[OK] Veículo encontrado pela placa: " + v),
+                () -> System.out.println("[INFO] Nenhum veículo encontrado com a placa: " + placa)
+        );
+    }
 }

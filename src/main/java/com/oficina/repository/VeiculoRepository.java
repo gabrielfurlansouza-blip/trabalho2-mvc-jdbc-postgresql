@@ -74,6 +74,21 @@ public class VeiculoRepository {
         return veiculos;
     }
 
+    public Optional<Veiculo> findByPlaca(String placa) {
+        String sql = "SELECT * FROM veiculos WHERE UPPER(placa) = UPPER(?)";
+        try (Connection conn = Conexao.getConexao();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, placa);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return Optional.of(mapResultSet(rs));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erro ao buscar veículo por placa: " + e.getMessage(), e);
+        }
+        return Optional.empty();
+    }
+
     public void update(Veiculo veiculo) {
         String sql = "UPDATE veiculos SET placa = ?, modelo = ?, ano = ?, id_cliente = ? WHERE id = ?";
         try (Connection conn = Conexao.getConexao();
